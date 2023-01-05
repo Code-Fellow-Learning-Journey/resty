@@ -1,15 +1,19 @@
 
 
 const Results = (props) => {
-  
-  const { data } = props;
 
-    return (
-      <section>
-        <pre>{data ? JSON.stringify(data, undefined, 2) : null}</pre>
-      </section>
-    );
-  
+  const { data, loading } = props;
+
+  return (
+    <section>
+      {loading ? 
+        <pre> Loading...</pre>:
+      <pre data-testid="pre-form">{data ? JSON.stringify(data, undefined, 2) : null}</pre>
+      
+      }
+    </section>
+  );
+
 }
 
 export default Results;

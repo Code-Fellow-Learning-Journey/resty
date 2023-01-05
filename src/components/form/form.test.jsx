@@ -10,5 +10,6 @@ describe('Form test', () => {
 
     // get the elements from the RENDERED component
     const button = screen.getByTestId('submit');
-  }
-}
+  
+  });
+});
