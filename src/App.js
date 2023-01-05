@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import './app.scss';
@@ -10,47 +10,37 @@ import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
 
-const App = () => {
+const App = (props) => {
 
   const [data, setData] = useState(null);
   const [requestParams, setParams] = useState({});
+  const [loading, setLoading] = useState(false);
 
-
-  // two lines above are changing the constructor
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     data: null,
-  //     requestParams: {},
-  //   };
-  // }
-
-  const callApi = async (requestParams) => {
-    // mock output
-     const data = await axios(requestParams);
-     console.log(data);
-     //{
-    //   count: 2,
-    //   results: [
-    //     { name: 'fake thing 1', url: 'http://fakethings.com/1' },
-    //     { name: 'fake thing 2', url: 'http://fakethings.com/2' },
-    //   ],
-    // };
-    // this.setState({data, requestParams});
-    setData(data.data);
-    setParams(requestParams);
-  }
+  useEffect(() => {
+    
+    const callApi = async (requestParams) => {
+      // mock output
+      setLoading(true);
+      
+      const data = await axios(requestParams);
+      console.log(data);
+  
+      setData(data.data);
+      setParams(requestParams);
+      setLoading(false);
+    }
+    callApi(requestParams);
+  }, [requestParams])
 
   return (
-    <React.Fragment>
+    <>
       <Header />
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} />
-      <Results data={data} />
+      <Form setParams={setParams} setLoading={setLoading} />
+      <Results data={data} loading={loading} />
       <Footer />
-    </React.Fragment>
+    </>
   );
 }
 

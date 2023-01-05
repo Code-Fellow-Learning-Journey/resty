@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import './form.scss';
 
 const Form = (props) => {
 
-  const { handleApiCall } = props;
-  const [currentMethod, setMethod] = useState('GET');
+  // const { handleApiCall, setLoading } = props;
+  const [jasonData, setJsonData] = useState();
+  const [method, setMethod] = useState('GET');
+  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon')
+  
+
+ 
 
   const handleSubmit = e => {
     e.preventDefault();
     const formData = {
-      method: currentMethod,
-      url: 'https://pokeapi.co/api/v2/pokemon',
+      method: method,
+      json: jasonData,
+      url: url,
     };
-    handleApiCall(formData);
+     props.setParams(formData);
   }
+  
 
   const setActiveClass = (method) => {
-    return method === currentMethod ? 'active' : '';
+    return method === setMethod ? 'active' : '';
   }
 
 
   return (
     <>
-      <form data-testid="submit-button" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label >
           <span>URL: </span>
-          <input name='url' type='text' />
-          <button type="submit">GO!</button>
+          <input data-testid="form-input" name='url' type='text' onChange={(e) => setUrl(e.target.value)} />
+          <button data-testid="submit-button" type="submit">GO!</button>
         </label>
-        <label>Update API</label>
-        <textarea id='uplod' name='upload'
+        <label>Update API
+          <textarea onChange={(e) => setJsonData(e.target.value)} id='uplod' name='upload'
           rows='5' cols='33'></textarea>
+        </label>
         <label className="methods">
           <span id="get" className={setActiveClass('GET')} onClick={() => setMethod('GET')}>GET</span>
           <span id="post" className={setActiveClass('POST')} onClick={() => setMethod('POST')}>POST</span>
