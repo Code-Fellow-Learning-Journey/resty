@@ -41,10 +41,10 @@ const Form = (props) => {
           rows='5' cols='33'></textarea>
         </label>
         <label className="methods">
-          <span id="get" className={setActiveClass('GET')} onClick={() => setMethod('GET')}>GET</span>
-          <span id="post" className={setActiveClass('POST')} onClick={() => setMethod('POST')}>POST</span>
-          <span id="put" className={setActiveClass('PUT')} onClick={() => setMethod('PUT')}>PUT</span>
-          <span id="delete" className={setActiveClass('DELETE')} onClick={() => setMethod('DELETE')}>DELETE</span>
+          <span id="get" className={setActiveClass('get')} onClick={() => setMethod('GET')}>GET</span>
+          <span id="post" className={setActiveClass('post')} onClick={() => setMethod('POST')}>POST</span>
+          <span id="put" className={setActiveClass('put')} onClick={() => setMethod('PUT')}>PUT</span>
+          <span id="delete" className={setActiveClass('delete')} onClick={() => setMethod('DELETE')}>DELETE</span>
         </label>
       </form>
     </>
