@@ -35,7 +35,7 @@ const App = (props) => {
   return (
     <>
       <Header />
-      <div>Request Method: {requestParams.method}</div>
+      <div>Request Method: {requestParams?.method?.toUpperCase}</div>
       <div>URL: {requestParams.url}</div>
       <Form setParams={setParams} setLoading={setLoading} />
       <Results data={data} loading={loading} />

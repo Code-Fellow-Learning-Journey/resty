@@ -2,7 +2,16 @@ import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
+
 import App from './App';
+
+const server = setupServer(
+  rest.get('/getTest', (req, res, ctx) => {
+    return res(ctx.json({results: [{name: 'tester'}, {name:}]}))
+  }),
+)
+
+
 
 const server = setupServer(
   rest.get('/testGet', (req, res, ctx) => {
@@ -23,8 +32,8 @@ describe('App Component', () => {
   test('renders learn react link', async () => {
     render(<App />);
   
-    const input = screen.getByTestId('form-input');
-    const button = screen.getByTestId('submit-button');
+    let input = screen.getByTestId('form-input');
+    let button = screen.getByTestId('submit-button');
   
     fireEvent.change(input, {target: {value: '/testGet'}})
     fireEvent.click(button);
