@@ -13,16 +13,6 @@ const server = setupServer(
 
 
 
-const server = setupServer(
-  rest.get('/testGet', (req, res, ctx) => {
-    return res(ctx.json({
-      results: [
-        {name: 'Hunter', age: 26},
-        {name: 'Titan', age: 5},
-      ],
-  }));
-  }),
-)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
